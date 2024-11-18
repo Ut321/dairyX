@@ -1,3 +1,4 @@
+import 'package:dairyx/feature/registerPage/register_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' show pi, cos, sin;
 
@@ -65,12 +66,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(width: 48), // Placeholder for spacing
+                  const SizedBox(width: 48),
                   CustomProgressButton(
                     progress: (_currentPage + 1) / _contents.length,
                     onPressed: () {
                       if (_currentPage == _contents.length - 1) {
-                        // Navigate to home screen
+                    
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterScreen()),
+                        );
                       } else {
                         _pageController.nextPage(
                           duration: const Duration(milliseconds: 300),
@@ -123,7 +129,6 @@ class CustomProgressButton extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Progress circle
             CustomPaint(
               painter: CircularProgressPainter(
                 progress: progress,
@@ -131,7 +136,6 @@ class CustomProgressButton extends StatelessWidget {
               ),
               size: const Size(60, 60),
             ),
-            // Center icon
             Container(
               width: 50,
               height: 50,
@@ -166,14 +170,12 @@ class CircularProgressPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 2;
 
-    // Draw progress arc
     final Paint progressPaint = Paint()
       ..color = color
       ..strokeWidth = 3.0
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    // Background circle
     canvas.drawCircle(
       center,
       radius - progressPaint.strokeWidth / 2,
@@ -183,17 +185,15 @@ class CircularProgressPainter extends CustomPainter {
         ..style = PaintingStyle.stroke,
     );
 
-    // Progress arc
     canvas.drawArc(
       Rect.fromCircle(
           center: center, radius: radius - progressPaint.strokeWidth / 2),
-      -pi / 2, // Start from top
+      -pi / 2,
       2 * pi * progress,
       false,
       progressPaint,
     );
 
-    // Small circle at the end of the progress
     if (progress > 0 && progress < 1) {
       final angle = -pi / 2 + (2 * pi * progress);
       final dotCenter = Offset(
@@ -215,7 +215,6 @@ class CircularProgressPainter extends CustomPainter {
   }
 }
 
-// Rest of the classes remain the same (OnboardingContent, OnboardingPage, CurvedBackgroundPainter)
 class OnboardingContent {
   final String title;
   final String description;
@@ -240,13 +239,11 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Curved green background
         Positioned.fill(
           child: CustomPaint(
             painter: CurvedBackgroundPainter(pageIndex: pageIndex),
           ),
         ),
-        // Content
         Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -258,7 +255,7 @@ class OnboardingPage extends StatelessWidget {
                 height: 280,
               ),
               const Spacer(),
-              // Title
+
               Text(
                 content.title,
                 style: const TextStyle(
@@ -269,7 +266,6 @@ class OnboardingPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              // Description
               Text(
                 content.description,
                 style: const TextStyle(
@@ -304,14 +300,11 @@ class CurvedBackgroundPainter extends CustomPainter {
 
     final path = Path();
 
-    // Start from top-left
     path.lineTo(0, 0);
     path.lineTo(size.width, 0);
 
-    // Different curve patterns based on page index
     switch (pageIndex) {
       case 0:
-        // Wave-like curve
         path.lineTo(size.width, size.height * 0.5);
         path.quadraticBezierTo(
           size.width * 0.75,
@@ -328,7 +321,6 @@ class CurvedBackgroundPainter extends CustomPainter {
         break;
 
       case 1:
-        // S-shaped curve
         path.lineTo(size.width, size.height * 0.3);
         path.quadraticBezierTo(
           size.width * 0.75,
@@ -345,7 +337,6 @@ class CurvedBackgroundPainter extends CustomPainter {
         break;
 
       case 2:
-        // Diagonal curve
         path.lineTo(size.width, size.height * 0.4);
         path.cubicTo(
           size.width * 0.75,
@@ -358,7 +349,6 @@ class CurvedBackgroundPainter extends CustomPainter {
         break;
 
       case 3:
-        // Double curve
         path.lineTo(size.width, size.height * 0.45);
         path.quadraticBezierTo(
           size.width * 0.8,
@@ -381,7 +371,6 @@ class CurvedBackgroundPainter extends CustomPainter {
         break;
 
       default:
-        // Default curve
         path.lineTo(size.width, size.height * 0.5);
         path.quadraticBezierTo(
           size.width * 0.5,
@@ -391,7 +380,6 @@ class CurvedBackgroundPainter extends CustomPainter {
         );
     }
 
-    // Close the path
     path.close();
 
     canvas.drawPath(path, paint);
