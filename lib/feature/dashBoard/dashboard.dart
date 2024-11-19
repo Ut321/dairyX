@@ -1,3 +1,5 @@
+import 'package:dairyx/feature/addFarmers/add_farmer.dart';
+import 'package:dairyx/feature/formerDetails/former_details.dart';
 import 'package:dairyx/mikCollection/milk_collection.dart';
 import 'package:flutter/material.dart';
 
@@ -95,7 +97,7 @@ class DashboardPage extends StatelessWidget {
       {
         'label': 'Farmers',
         'icon': Icons.people,
-        'page': null
+        'page': FarmersContactScreen()
       }, // Add other actions here
       {'label': 'Rate Chart', 'icon': Icons.show_chart, 'page': null},
       {'label': 'Payment', 'icon': Icons.payment, 'page': null},

@@ -1,3 +1,4 @@
+import 'package:dairyx/feature/addFarmers/add_farmer.dart';
 import 'package:flutter/material.dart';
 
 class MilkCollectionPage extends StatefulWidget {
@@ -24,7 +25,10 @@ class _MilkCollectionPageState extends State<MilkCollectionPage> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              // Add action logic
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddFarmerPage()),
+              );
             },
           ),
         ],
