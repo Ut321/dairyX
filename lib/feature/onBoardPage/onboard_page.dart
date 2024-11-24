@@ -1,4 +1,4 @@
-import 'package:dairyx/feature/registerPage/register_page.dart';
+import 'package:dairyx/feature/registerPage/login_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' show pi, cos, sin;
 
@@ -75,7 +75,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RegisterScreen()),
+                              builder: (context) => LoginPage()),
                         );
                       } else {
                         _pageController.nextPage(
