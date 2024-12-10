@@ -98,7 +98,7 @@ class _SelectionPageState extends State<SelectionPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const DashboardPage(),
+                                  builder: (context) =>  DashboardPage(),
                                 ),
                               );
                             });
@@ -128,7 +128,7 @@ class _SelectionPageState extends State<SelectionPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const DashboardPage(),
+                                  builder: (context) =>  DashboardPage(),
                                 ),
                               );
                             });
